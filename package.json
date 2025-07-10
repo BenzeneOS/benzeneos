@@ -96,10 +96,22 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.19.1",
-    "typescript": "5.6.3",
+    "typescript": "^5.6.3",
     "vite": "^5.4.19"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"
-  }
+  },
+  "description": "<!-- **BenzeneOS/benzeneos** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://BenzeneOS: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@github.com/BenzeneOS/benzeneos.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/BenzeneOS/benzeneos.github.io/issues"
+  },
+  "homepage": "https://github.com/BenzeneOS/benzeneos.github.io#readme"
 }
