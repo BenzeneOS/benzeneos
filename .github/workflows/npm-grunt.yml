@@ -1,29 +1,42 @@
-name: NodeJS with Grunt
+name: Build & Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main     # or your default branch
+
+permissions:
+  contents: read            # for actions/checkout
+  pages: write              # to deploy to GitHub Pages
+  id-token: write           # required by actions/deploy-pages
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-
     steps:
-    - uses: actions/checkout@v4
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'     # or whatever LTS you need
 
-    - name: Build
-      run: |
-        npm install
-        grunt
-        npm run build
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build site
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
+        with:
+          # This must match the folder you want to publish:
+          # in your case it’s dist/public
+          publish_dir: ./dist/public
+
+      # (Optional) If you want to log the Pages URL at the end:
+      - name: Show Pages URL
+        run: echo "👉 Your site is live at https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+
